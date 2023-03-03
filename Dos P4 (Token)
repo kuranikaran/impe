@@ -1,0 +1,41 @@
+#include&lt;stdio.h&gt;
+struct process{
+int timestamp,cs;
+}p[20];
+void main(){
+int i,j,pn,cs_no=0,small,index;
+printf(&quot;\nNo of processes : &quot;);
+scanf(&quot;%d&quot;,&amp;pn);
+for(i=0;i&lt;pn;i++)
+{
+printf(&quot;\nEnter timestamp for Process %d : &quot;,i+1);
+scanf(&quot;%d&quot;,&amp;p[i].timestamp);
+printf(&quot;\nProcess %d want to participate (enter 1 for yes or 0 for no): &quot;,i+1);
+scanf(&quot;%d&quot;,&amp;p[i].cs);
+}
+for(i=0;i&lt;pn;i++)
+{
+if(p[i].cs == 1)
+cs_no++;
+}
+printf(&quot;\nNo of processes participating cs : %d&quot;,cs_no);
+for(i=0;i&lt;cs_no;i++)
+{
+small=999;
+for(j=0;j&lt;pn;j++)
+{
+if(p[j].timestamp&lt;small &amp;&amp; p[j].cs!=0)
+{
+small=p[j].timestamp;
+
+index=j;
+}
+}
+// printf(&quot;\nSmall : %d&quot;,small);
+p[index].cs=0;
+sleep(2);
+printf(&quot;\n\nProcess %d is executing cs ... Timestamp = %d&quot;,index+1,p[index].timestamp);
+sleep(2);
+printf(&quot;\nProcess %d is exiting from cs...&quot;,index+1);
+}
+}
